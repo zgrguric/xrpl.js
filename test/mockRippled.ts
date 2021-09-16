@@ -47,6 +47,38 @@ export interface PortResponse extends BaseResponse {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- typing is too complicated otherwise
 type MockedWebSocketServer = any
 
+class MockedWebSocketBroadcastServer {
+  public mocks: MockedWebSocketServer[]
+  public constructor(mocks: MockedWebSocketServer[]) {
+    this.mocks = mocks
+  }
+
+  public addResponse(
+    command: string,
+    response:
+      | Response
+      | ErrorResponse
+      | ((r: Request) => Response | ErrorResponse),
+  ): void {
+    this.mocks.forEach((mock) => {
+      mock.addResponse(command, response)
+    })
+  }
+
+  public close(): void {
+    this.mocks.forEach((mock: { close: () => void }) => mock.close())
+  }
+}
+
+export function createBroadcastMockRippled(
+  ports: number[],
+): MockedWebSocketBroadcastServer {
+  // eslint-disable-next-line max-len -- Too many rules to disable
+  // eslint-disable-next-line @typescript-eslint/promise-function-async, @typescript-eslint/no-unsafe-return -- Typing is too complicated, not an async function
+  const mocks = ports.map((port) => createMockRippled(port))
+  return new MockedWebSocketBroadcastServer(mocks)
+}
+
 // eslint-disable-next-line @typescript-eslint/promise-function-async -- Not a promise that's returned
 export default function createMockRippled(port: number): MockedWebSocketServer {
   const mock = new WebSocketServer({ port }) as MockedWebSocketServer
