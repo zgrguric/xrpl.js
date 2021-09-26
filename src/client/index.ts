@@ -164,7 +164,7 @@ const MAX_LIMIT = 400
 class Client extends EventEmitter {
   // New in > 0.21.0
   // non-validated ledger versions are allowed, and passed to rippled as-is.
-  public readonly connection: Connection
+  private readonly connection: Connection
 
   // Factor to multiply estimated fee by to provide a cushion in case the
   // required fee rises during submission of a transaction. Defaults to 1.2.
@@ -239,6 +239,15 @@ class Client extends EventEmitter {
     this.connection.on('path_find', (path) => {
       this.emit('path_find', path)
     })
+  }
+
+  /**
+   * Get the URL of the server the Client is connected to.
+   *
+   * @returns The URL of the rippled server this Client is connected to.
+   */
+  public get url(): string {
+    return this.connection.getUrl()
   }
 
   /**

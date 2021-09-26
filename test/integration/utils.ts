@@ -11,7 +11,7 @@ const masterSecret = 'snoPBrXtMeMyMHUVTgbuqAfg1SUTb'
 
 export async function ledgerAccept(client: Client): Promise<void> {
   const request = { command: 'ledger_accept' }
-  await client.connection.request(request)
+  await client.request(request)
 }
 
 export async function fundAccount(

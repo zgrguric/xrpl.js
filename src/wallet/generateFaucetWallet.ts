@@ -281,7 +281,7 @@ async function hasAddressBalanceIncreased(
  * @returns A {@link FaucetNetwork}.
  */
 function getFaucetUrl(client: Client): FaucetNetwork | undefined {
-  const connectionUrl = client.connection.getUrl()
+  const connectionUrl = client.url
 
   // 'altnet' for Ripple Testnet server and 'testnet' for XRPL Labs Testnet server
   if (connectionUrl.includes('altnet') || connectionUrl.includes('testnet')) {
