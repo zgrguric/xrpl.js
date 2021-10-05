@@ -84,7 +84,7 @@
     "watch": "run-s build:lib --watch",
     "clean": "rm -rf dist",
     "docgen": "typedoc ./src/index.ts",
-    "prepublish": "run-s clean build",
+    "prepublish": "npm run clean && npm run build",
     "test": "nyc mocha --config=test/.mocharc.json --exit",
     "test:integration": "TS_NODE_PROJECT=tsconfig.build.json nyc mocha ./test/integration/**/*.ts ./test/integration/*.ts",
     "test:browser": "npm run build:browserTests && TS_NODE_PROJECT=tsconfig.build.json nyc mocha ./test/browser/*.ts",
