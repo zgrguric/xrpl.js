@@ -182,6 +182,8 @@ class Client extends EventEmitter {
   // eslint-disable-next-line max-lines-per-function -- okay because we have to set up all the connection handlers
   public constructor(server: string, options: ClientOptions = {}) {
     super()
+    console.log('CONSTRUCTING CLIENT')
+
     if (typeof server !== 'string' || !/wss?(?:\+unix)?:\/\//u.exec(server)) {
       throw new ValidationError(
         'server URI must start with `wss://`, `ws://`, `wss+unix://`, or `ws+unix://`.',
