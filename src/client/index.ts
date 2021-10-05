@@ -500,6 +500,8 @@ class Client extends EventEmitter {
    * @returns A promise that resolves with a void value when a connection is established.
    */
   public async connect(): Promise<void> {
+    console.log('CONNECTING IN CLIENT.CONNECT')
+
     return this.connection.connect()
   }
 

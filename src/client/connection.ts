@@ -216,6 +216,7 @@ export class Connection extends EventEmitter {
    * @throws ConnectionError if there is a connection error, RippleError if there is already a WebSocket in existence.
    */
   public async connect(): Promise<void> {
+    console.log('CONNECTING IN CONNECTION.CONNECT')
     if (this.isConnected()) {
       return Promise.resolve()
     }
@@ -325,6 +326,7 @@ export class Connection extends EventEmitter {
     if (!this.shouldBeConnected || this.ws == null) {
       throw new NotConnectedError()
     }
+
     const [id, message, responsePromise] = this.requestManager.createRequest(
       request,
       timeout ?? this.config.timeout,
