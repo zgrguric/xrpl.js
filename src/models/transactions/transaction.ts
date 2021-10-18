@@ -166,9 +166,21 @@ export function validate(transaction: Record<string, unknown>): void {
   if (
     !_.isEqual(
       decode(encode(tx)),
-      _.omitBy(tx, (value) => value == null),
+      omitBy(tx, (value) => value == null),
     )
   ) {
     throw new ValidationError(`Invalid Transaction: ${tx.TransactionType}`)
   }
+}
+
+function omitBy(
+  obj: Record<string, unknown>,
+  fn: (value: unknown) => unknown,
+): Record<string, unknown> {
+  return (
+    Object.keys(obj)
+      .filter((key) => !fn(obj[key]))
+      // eslint-disable-next-line no-return-assign -- it's fine
+      .reduce((acc, key) => ((acc[key] = obj[key]), acc), {})
+  )
 }
