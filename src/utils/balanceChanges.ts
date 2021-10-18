@@ -181,5 +181,5 @@ export default function getBalanceChanges(
     }
     return []
   })
-  return groupByAccount(_.flatten(quantities))
+  return groupByAccount(quantities.flat())
 }
