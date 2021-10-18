@@ -1,6 +1,4 @@
-/* eslint-disable max-lines-per-function -- Needs to process orderbooks. */
 import BigNumber from 'bignumber.js'
-import _ from 'lodash'
 
 import type { Client } from '../client'
 import { LedgerIndex } from '../models/common'
@@ -65,12 +63,10 @@ async function getOrderbook(
   request.taker_pays = takerGets
   const reverseOfferResults = await this.requestAll(request)
   // 3. Return Formatted Response
-  const directOffers = _.flatMap(
-    directOfferResults,
+  const directOffers = directOfferResults.flatMap(
     (directOfferResult) => directOfferResult.result.offers,
   )
-  const reverseOffers = _.flatMap(
-    reverseOfferResults,
+  const reverseOffers = reverseOfferResults.flatMap(
     (reverseOfferResult) => reverseOfferResult.result.offers,
   )
 
