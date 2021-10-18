@@ -1,7 +1,7 @@
 /* eslint-disable complexity -- verifies 19 tx types hence a lot of checks needed */
 /* eslint-disable max-lines-per-function -- need to work with a lot of Tx verifications */
 
-import _ from 'lodash'
+import isEqual from 'lodash/isEqual'
 import { encode, decode } from 'ripple-binary-codec'
 
 import { ValidationError } from '../../errors'
@@ -164,7 +164,7 @@ export function validate(transaction: Record<string, unknown>): void {
   }
 
   if (
-    !_.isEqual(
+    !isEqual(
       decode(encode(tx)),
       omitBy(tx, (value) => value == null),
     )

@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import _ from 'lodash'
+import groupBy from 'lodash/groupBy'
 
 import { Amount, IssuedCurrencyAmount } from '../models/common'
 import TransactionMetadata, { Node } from '../models/transactions/metadata'
@@ -66,7 +66,7 @@ function normalizeNodes(metadata: TransactionMetadata): NormalizedNode[] {
 }
 
 function groupByAccount(balanceChanges: BalanceChange[]): BalanceChanges[] {
-  const grouped = _.groupBy(balanceChanges, (node) => node.account)
+  const grouped = groupBy(balanceChanges, (node) => node.account)
   return Object.entries(grouped).map(([account, items]) => {
     return { account, balances: items.map((item) => item.balance) }
   })

@@ -2,7 +2,6 @@
 import net from 'net'
 
 import { assert } from 'chai'
-import _ from 'lodash'
 
 import {
   Client,
