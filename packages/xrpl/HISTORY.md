@@ -5,6 +5,9 @@ Subscribe to [the **xrpl-announce** mailing list](https://groups.google.com/g/xr
 ### Added
 * Support for ExpandedSignerList amendment that expands the maximum signer list to 32 entries.
 
+### Removed
+* RPCs and utils related to the old sidechain design
+
 ## 2.4.0 (2022-09-01)
 ### Added
 * Export `verify` from ripple-keypairs as `verifyKeypairSignature` for use in web-apps.
